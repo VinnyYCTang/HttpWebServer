@@ -11,11 +11,9 @@ import java.util.Date;
 *
 * */
 public class DateUtil {
-
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
 
-    private DateUtil(){
-    }
+    private DateUtil(){}
 
     /*
     * Get system's current time

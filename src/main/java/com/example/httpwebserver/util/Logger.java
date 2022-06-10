@@ -11,8 +11,7 @@ import java.util.Date;
 * */
 public class Logger {
 
-    private Logger(){
-    }
+    private Logger(){}
 
     /*
     * normal Logger.log
