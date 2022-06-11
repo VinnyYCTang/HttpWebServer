@@ -21,14 +21,15 @@ public class BootStrap {
     }
 
     public static void start() {
-        long begin = System.currentTimeMillis();
-        Logger.log("httpserver start");
+
         ServerSocket serverSocket = null;
         try {
-            int port = 8080;
+            long start = System.currentTimeMillis();
+            int port = ServerParser.getPort();
+            Logger.log("httpserver start on " + port + " port");
             serverSocket = new ServerSocket(port);
             long end = System.currentTimeMillis();
-            Logger.log("httpserver started, " + (end-begin) + "ms");
+            Logger.log("httpserver started, " + (end-start) + "ms");
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -40,5 +41,6 @@ public class BootStrap {
                 }
             }
         }
+
     }
 }
