@@ -28,10 +28,9 @@ public class HandlerRequest implements Runnable{
         Logger.log("httpServer thread: " + Thread.currentThread().getName());
         try {
             br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String temp = null;
-            while ((temp = br.readLine()) != null) {
-                System.out.println(temp);
-            }
+            String requestLine = br.readLine();// GET resource.html HTTP/1.1
+            String requestURI = requestLine.split(" ")[1];
+            System.out.println(requestURI);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
