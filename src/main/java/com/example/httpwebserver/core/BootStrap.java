@@ -28,7 +28,6 @@ public class BootStrap {
 
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
-        BufferedReader br = null;
         try {
             long start = System.currentTimeMillis();
             int port = ServerParser.getPort();
@@ -39,11 +38,9 @@ public class BootStrap {
             long end = System.currentTimeMillis();
             Logger.log("httpserver started, " + (end-start) + "ms");
 
-            clientSocket = serverSocket.accept();
-            br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String temp = null;
-            while((temp = br.readLine()) != null){
-                System.out.println(temp);
+            while(true) {
+                clientSocket = serverSocket.accept();
+                new Thread(new HandlerRequest(clientSocket)).start();
             }
 
         } catch (IOException e) {
@@ -52,20 +49,6 @@ public class BootStrap {
             if(serverSocket != null && !serverSocket.isClosed()){
                 try {
                     serverSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(clientSocket != null && !clientSocket.isClosed()){
-                try {
-                    clientSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(br != null){
-                try {
-                    br.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
