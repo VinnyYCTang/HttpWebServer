@@ -1,9 +1,11 @@
 package com.example.httpwebserver.core;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 
 /*
 *  Parsing serverConfig.xml document
@@ -21,20 +23,15 @@ public class ServerParser {
 
         // set default port value to 8080.
         int port = 8080;
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         try {
-            // create a reader.
-            SAXReader saxReader = new SAXReader();
-            // get a document[org.dom4j] object by using reader's read() method.
-            Document document = saxReader.read("conf/serverConfig.xml");
-            /* get path of connector element from root :
-             * [server -> service -> connector]
-             * get xpath of connector element from root :
-             * [/server/service/connector], [server//connector], [//connector]
-             **/
-            Element connectorElt = (Element) document.selectSingleNode("//connector");
-            // get port by attribute
-            port =  Integer.parseInt(connectorElt.attributeValue("port"));
-        } catch (DocumentException e) {
+            documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            Document doc = documentBuilderFactory.newDocumentBuilder().parse(new File("conf/serverConfig.xml"));
+            doc.getDocumentElement().normalize();
+            NodeList list = doc.getElementsByTagName("connector");
+            Element element = (Element) list.item(0);
+            port = Integer.parseInt(element.getAttribute("port"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return port;

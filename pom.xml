@@ -41,11 +41,11 @@
             <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+        <!-- https://mvnrepository.com/artifact/javax.xml.parsers/jaxp-api -->
         <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
+            <groupId>javax.xml.parsers</groupId>
+            <artifactId>jaxp-api</artifactId>
+            <version>1.4.5</version>
         </dependency>
     </dependencies>
 

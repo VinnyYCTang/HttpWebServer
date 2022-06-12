@@ -1,1 +1,4 @@
-/target
+/target/*
+.idea/
+HttpWebServer.iml
+src/test/test.iml
