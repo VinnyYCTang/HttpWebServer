@@ -1,6 +1,8 @@
 package com.example.httpwebserver.core;
 
 import com.example.httpwebserver.util.Logger;
+import org.benq.oa.servlet.LoginServlet;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -26,16 +28,25 @@ public class HandlerRequest implements Runnable{
         Logger.log("httpServer thread: " + Thread.currentThread().getName());
         try {
             br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-
             out = new PrintWriter(clientSocket.getOutputStream());
-
-
             String requestLine = br.readLine();// GET resource.html HTTP/1.1
             String requestURI = requestLine.split(" ")[1];
-            // Check user's request is static resource or not.
+            // Check user's request is static or dynamic resource.
             if(requestURI.endsWith(".html") || requestURI.endsWith(".htm")){
+                // Handle static resource.
+                // requestURI : /benq/index.html
                 responseStaticPage(requestURI, out);
+            } else {
+                // Handle dynamic resource.
+                // requestURI : /benq/login?username=XXX&password=OOO
+                String servletPath = requestURI;
+                if(servletPath.contains("?")){
+                    servletPath = servletPath.split("[?]")[0];
+                }
+                if("/benq/login".equals(servletPath)){
+                    LoginServlet loginServlet = new LoginServlet();
+                    loginServlet.service();
+                }
             }
             out.flush();
         } catch (IOException e) {
@@ -65,8 +76,8 @@ public class HandlerRequest implements Runnable{
     * */
     public void responseStaticPage(String requestURI, PrintWriter out) {
 
-        // requestURI : /welcome/index.html
-        // static resource path : welcome/index.html
+        // requestURI : /benq/index.html
+        // static resource path : benq/index.html
         String htmlPath = requestURI.substring(1);
         BufferedReader br = null;
         try {
