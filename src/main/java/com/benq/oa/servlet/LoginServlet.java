@@ -1,4 +1,7 @@
-package org.benq.oa.servlet;
+package com.benq.oa.servlet;
+
+import javax.servlet.Servlet;
+
 /*
 * This class should be developed by webApp developer, and managed by webServer.
 * The process of this class handles webApp login procedure.
@@ -7,7 +10,7 @@ package org.benq.oa.servlet;
 * @since 1.0
 *
 * */
-public class LoginServlet {
+public class LoginServlet implements Servlet {
 
     public void service(){
         System.out.println("processing...");

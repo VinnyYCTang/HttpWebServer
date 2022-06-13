@@ -17,6 +17,8 @@ import java.net.Socket;
 * */
 public class BootStrap {
 
+
+    private final static String[] webAppNames = {"benq"};
     /*
     * @param args
     **/
@@ -29,10 +31,11 @@ public class BootStrap {
         ServerSocket serverSocket = null;
         Socket clientSocket = null;
         try {
-            long start = System.currentTimeMillis();
             int port = ServerParser.getPort();
+            long start = System.currentTimeMillis();
             Logger.log("httpserver start on " + port + " port");
 
+            WebParser.parser(webAppNames);
             serverSocket = new ServerSocket(port);
 
             long end = System.currentTimeMillis();
@@ -43,7 +46,7 @@ public class BootStrap {
                 new Thread(new HandlerRequest(clientSocket)).start();
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }finally {
             if(serverSocket != null && !serverSocket.isClosed()){

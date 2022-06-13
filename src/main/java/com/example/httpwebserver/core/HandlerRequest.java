@@ -1,10 +1,11 @@
 package com.example.httpwebserver.core;
 
 import com.example.httpwebserver.util.Logger;
-import org.benq.oa.servlet.LoginServlet;
 
+import javax.servlet.Servlet;
 import java.io.*;
 import java.net.Socket;
+import java.util.Map;
 
 /*
 * Handle request from client.
@@ -40,16 +41,20 @@ public class HandlerRequest implements Runnable{
                 // Handle dynamic resource.
                 // requestURI : /benq/login?username=XXX&password=OOO
                 String servletPath = requestURI;
-                if(servletPath.contains("?")){
+                if(servletPath.contains("?"))
                     servletPath = servletPath.split("[?]")[0];
-                }
-                if("/benq/login".equals(servletPath)){
-                    LoginServlet loginServlet = new LoginServlet();
-                    loginServlet.service();
-                }
+                String webAppName = servletPath.split("[/]")[1];
+                String urlPattern = servletPath.substring(1 + webAppName.length());
+                Map<String, String> servletMap = WebParser.servletsMaps.get(webAppName);
+                String servletClassName = servletMap.get(urlPattern);
+                // create the servletClass object by reflection.
+                Class c = Class.forName(servletClassName);
+                Object obj = c.newInstance();
+                Servlet servlet = (Servlet) obj;
+                servlet.service();
             }
             out.flush();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (br != null) {

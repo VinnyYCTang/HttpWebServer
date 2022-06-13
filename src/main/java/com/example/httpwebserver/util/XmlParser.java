@@ -9,8 +9,10 @@ import java.io.File;
 
 public class XmlParser {
 
-    private XmlParser(){}
     private final static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+
+    private XmlParser(){}
+
     public static NodeList getElementByTagName(String FilePath, String tagName) throws Exception {
         documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         Document doc = documentBuilderFactory.newDocumentBuilder().parse(new File(FilePath));
