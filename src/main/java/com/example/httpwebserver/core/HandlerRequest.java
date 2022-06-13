@@ -46,12 +46,19 @@ public class HandlerRequest implements Runnable{
                 String webAppName = servletPath.split("[/]")[1];
                 String urlPattern = servletPath.substring(1 + webAppName.length());
                 Map<String, String> servletMap = WebParser.servletsMaps.get(webAppName);
-                String servletClassName = servletMap.get(urlPattern);
-                // create the servletClass object by reflection.
-                Class c = Class.forName(servletClassName);
-                Object obj = c.newInstance();
-                Servlet servlet = (Servlet) obj;
-                servlet.service();
+                if(servletMap != null) {
+                    String servletClassName = servletMap.get(urlPattern);
+                    if (servletClassName != null) {
+                        // create the servletClass object by reflection.
+                        Class c = Class.forName(servletClassName);
+                        Object obj = c.newInstance();
+                        Servlet servlet = (Servlet) obj;
+                        servlet.service();
+                    } else {
+                        // connot find the servlet resource.
+                        responseNotFoundPage(out);
+                    }
+                }
             }
             out.flush();
         } catch (Exception e) {
@@ -97,19 +104,7 @@ public class HandlerRequest implements Runnable{
             out.print(html);
         } catch (FileNotFoundException e) {
             // 404 NotFound
-            StringBuilder html = new StringBuilder();
-            html.append("HTTP/1.1 404 NotFound\n");
-            html.append("Content-Type:text/html;charset=utf-8\n\n");
-            html.append("<html>");
-            html.append("<head>");
-            html.append("<title>404-錯誤</title>");
-            html.append("<meta content='text/html;charset=utf-8' />");
-            html.append("</head>");
-            html.append("<body>");
-            html.append("<H1 style='color:red'>404錯誤</H1>");
-            html.append("</body>");
-            html.append("</html>");
-            out.print(html);
+            responseNotFoundPage(out);
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -121,5 +116,21 @@ public class HandlerRequest implements Runnable{
                 }
             }
         }
+    }
+
+    private void responseNotFoundPage(PrintWriter out){
+        StringBuilder html = new StringBuilder();
+        html.append("HTTP/1.1 404 NotFound\n");
+        html.append("Content-Type:text/html;charset=utf-8\n\n");
+        html.append("<html>");
+        html.append("<head>");
+        html.append("<title>404-錯誤</title>");
+        html.append("<meta content='text/html;charset=utf-8' />");
+        html.append("</head>");
+        html.append("<body>");
+        html.append("<H1 style='color:red'>404錯誤</H1>");
+        html.append("</body>");
+        html.append("</html>");
+        out.print(html);
     }
 }
