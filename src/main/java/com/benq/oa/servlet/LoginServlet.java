@@ -1,6 +1,10 @@
 package com.benq.oa.servlet;
 
+import com.example.httpwebserver.core.ResponseObject;
+
 import javax.servlet.Servlet;
+import javax.servlet.ServletResponse;
+import java.io.PrintWriter;
 
 /*
 * This class should be developed by webApp developer, and managed by webServer.
@@ -12,8 +16,13 @@ import javax.servlet.Servlet;
 * */
 public class LoginServlet implements Servlet {
 
-    public void service(){
-        System.out.println("processing...");
+    public void service(ServletResponse response){
+
+        PrintWriter out = response.getWriter();
+        out.print("HTTP/1.1 200 OK\n");
+        out.print("Content-Type:text/html;charset=utf-8\n\n");
+        out.print("processing...");
+        out.flush();
     }
 
 }

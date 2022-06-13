@@ -2,10 +2,7 @@ package com.example.httpwebserver.core;
 
 import com.example.httpwebserver.util.Logger;
 
-import javax.xml.soap.SOAPElementFactory;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 

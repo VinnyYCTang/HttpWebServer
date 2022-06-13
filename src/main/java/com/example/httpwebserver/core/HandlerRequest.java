@@ -49,11 +49,13 @@ public class HandlerRequest implements Runnable{
                 if(servletMap != null) {
                     String servletClassName = servletMap.get(urlPattern);
                     if (servletClassName != null) {
+                        ResponseObject responseObject = new ResponseObject();
+                        responseObject.setWriter(out);
                         // create the servletClass object by reflection.
                         Class c = Class.forName(servletClassName);
                         Object obj = c.newInstance();
                         Servlet servlet = (Servlet) obj;
-                        servlet.service();
+                        servlet.service(responseObject);
                     } else {
                         // connot find the servlet resource.
                         responseNotFoundPage(out);

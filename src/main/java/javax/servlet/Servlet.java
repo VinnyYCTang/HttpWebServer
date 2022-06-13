@@ -1,4 +1,7 @@
 package javax.servlet;
+
+import com.example.httpwebserver.core.ResponseObject;
+
 /*
 *
 * @author Sun Corp.
@@ -6,5 +9,6 @@ package javax.servlet;
 * @since    1.0
 * */
 public interface Servlet {
-    void service();
+
+    void service(ServletResponse response);
 }
