@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>儲存用戶資訊</title>
+        <meta content="text/html;charset=UTF-8" />
+    </head>
+    <body>
+        <form name="userForm" action="/benq/user/save" method="get">
+            <label for="username">用戶姓名 :</label><br>
+            <input type="text" id="username" name="username" />
+            <br><br>
+
+            <label>性別 :</label><br>
+            <input type="radio" id="boy" name="gender" value="boy"/>
+            <label for="boy">男</label>
+            <input type="radio" id="girl" name="gender" value="girl"/>
+            <label for="girl">女</label>
+            <br><br>
+
+            <label>興趣 :</label><br>
+            <input type="checkbox" id="music" name="interest" value="music"/>
+            <label for="music">音樂</label>
+            <input type="checkbox" id="sport" name="interest" value="sport"/>
+            <label for="sport">運動</label>
+            <input type="checkbox" id="food" name="interest" value="food"/>
+            <label for="food">美食</label>
+            <input type="checkbox" id="travel" name="interest" value="travel"/>
+            <label for="travel">旅遊</label>
+            <br><br>
+
+            <input type="submit" value="保存">
+            <input type="reset" value="重選">
+        </form>
+    </body>
+</html>
