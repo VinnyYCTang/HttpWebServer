@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 * */
 public class ResponseObject implements ServletResponse {
 
-    public PrintWriter out;
+    private PrintWriter out;
 
     public void setWriter(PrintWriter out){
         this.out = out;
