@@ -1,5 +1,6 @@
 package javax.servlet;
 
+import com.example.httpwebserver.core.RequestObject;
 import com.example.httpwebserver.core.ResponseObject;
 
 /*
@@ -10,5 +11,5 @@ import com.example.httpwebserver.core.ResponseObject;
 * */
 public interface Servlet {
 
-    void service(ServletResponse response);
+    void service(RequestObject requestObject, ServletResponse response);
 }

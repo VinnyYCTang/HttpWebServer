@@ -1,5 +1,6 @@
 package com.benq.oa.servlet;
 
+import com.example.httpwebserver.core.RequestObject;
 import com.example.httpwebserver.core.ResponseObject;
 
 import javax.servlet.Servlet;
@@ -16,7 +17,7 @@ import java.io.PrintWriter;
 * */
 public class LoginServlet implements Servlet {
 
-    public void service(ServletResponse response){
+    public void service(RequestObject requestObject, ServletResponse response){
 
         PrintWriter out = response.getWriter();
         out.print("HTTP/1.1 200 OK\n");
