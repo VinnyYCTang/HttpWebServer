@@ -65,7 +65,7 @@ public class actOpenServlet implements Servlet {
             out.print("<meta content='text/html;charset=utf-8'/>");
             out.print("</head>");
             out.print("<body>");
-            out.print("<center><font size='35px' color='green'>對不起，開戶失敗！</font></center>");
+            out.print("<center><font size='35px' color='red'>對不起，開戶失敗！</font></center>");
             out.print("</body>");
             out.print("</html>");
         }
