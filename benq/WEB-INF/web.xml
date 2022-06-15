@@ -2,7 +2,7 @@
 <web-app>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.benq.oa.servlet.LoginServlet</servlet-class>
+        <servlet-class>org.benq.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>userSaveServlet</servlet-name>
-        <servlet-class>com.benq.oa.servlet.UserSaveServlet</servlet-class>
+        <servlet-class>org.benq.servlet.UserSaveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userSaveServlet</servlet-name>

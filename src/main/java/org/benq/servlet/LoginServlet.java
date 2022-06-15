@@ -1,4 +1,4 @@
-package com.benq.oa.servlet;
+package org.benq.servlet;
 
 import com.example.httpwebserver.core.RequestObject;
 import com.example.httpwebserver.core.ResponseObject;

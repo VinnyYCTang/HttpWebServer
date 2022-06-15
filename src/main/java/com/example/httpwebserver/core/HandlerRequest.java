@@ -55,10 +55,16 @@ public class HandlerRequest implements Runnable{
                         RequestObject requestObject = new RequestObject(requestURI);
                         ResponseObject responseObject = new ResponseObject();
                         responseObject.setWriter(out);
-                        // create the servletClass object by reflection.
-                        Class c = Class.forName(servletClassName);
-                        Object obj = c.newInstance();
-                        Servlet servlet = (Servlet) obj;
+                        // get servlet from Servlet's pool.
+                        Servlet servlet = ServletCache.get(urlPattern);
+                        if(servlet == null) {
+                            // create the servletClass object by reflection.
+                            Class c = Class.forName(servletClassName);
+                            Object obj = c.newInstance();
+                            servlet = (Servlet) obj;
+                            ServletCache.put(urlPattern, servlet);
+                        }
+                        Logger.log("servlet " + servlet);
                         servlet.service(requestObject, responseObject);
                     } else {
                         // connot find the servlet resource.
