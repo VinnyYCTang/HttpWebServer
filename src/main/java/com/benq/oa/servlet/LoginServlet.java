@@ -4,6 +4,7 @@ import com.example.httpwebserver.core.RequestObject;
 import com.example.httpwebserver.core.ResponseObject;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.PrintWriter;
 
@@ -17,7 +18,7 @@ import java.io.PrintWriter;
 * */
 public class LoginServlet implements Servlet {
 
-    public void service(RequestObject requestObject, ServletResponse response){
+    public void service(ServletRequest request, ServletResponse response){
 
         PrintWriter out = response.getWriter();
         out.print("HTTP/1.1 200 OK\n");

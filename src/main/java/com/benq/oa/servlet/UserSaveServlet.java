@@ -3,17 +3,18 @@ package com.benq.oa.servlet;
 import com.example.httpwebserver.core.RequestObject;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.PrintWriter;
 
 public class UserSaveServlet implements Servlet {
 
     @Override
-    public void service(RequestObject requestObject, ServletResponse response) {
+    public void service(ServletRequest request, ServletResponse response) {
 
-        String username = requestObject.getParameterValue("username");
-        String gender = requestObject.getParameterValue("gender");
-        String[] interest = requestObject.getParameterValues("interest");
+        String username = request.getParameterValue("username");
+        String gender = request.getParameterValue("gender");
+        String[] interest = request.getParameterValues("interest");
         StringBuilder interests = new StringBuilder();
         for(String interestValue : interest){
             interests.append(interestValue).append(" ");
@@ -21,8 +22,6 @@ public class UserSaveServlet implements Servlet {
 
         // get printWriter
         PrintWriter out = response.getWriter();
-        out.print("HTTP/1.1 200 OK\n");
-        out.print("Content-Type:text/html;charset=utf-8\n\n");
         out.print("<html>");
         out.print("<head>");
         out.print("<title>User's Info</title>");

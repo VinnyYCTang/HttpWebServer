@@ -1,5 +1,6 @@
 package com.example.httpwebserver.core;
 
+import javax.servlet.ServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @since    1.0
  *
  * */
-public class RequestObject {
+public class RequestObject implements ServletRequest {
 
     private final Map<String, List<String>> parameterMap = new HashMap<>();
 

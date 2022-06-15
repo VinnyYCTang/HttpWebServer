@@ -51,6 +51,8 @@ public class HandlerRequest implements Runnable{
                     if (servletClassName != null) {
                         ResponseObject responseObject = new ResponseObject();
                         responseObject.setWriter(out);
+                        out.print("HTTP/1.1 200 OK\n");
+                        out.print("Content-Type:text/html;charset=utf-8\n\n");
                         RequestObject requestObject = new RequestObject(requestURI);
                         // create the servletClass object by reflection.
                         Class c = Class.forName(servletClassName);

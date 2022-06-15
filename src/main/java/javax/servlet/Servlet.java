@@ -11,5 +11,6 @@ import com.example.httpwebserver.core.ResponseObject;
 * */
 public interface Servlet {
 
-    void service(RequestObject requestObject, ServletResponse response);
+    void service(ServletRequest request, ServletResponse response);
+
 }
