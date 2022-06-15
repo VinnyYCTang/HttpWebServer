@@ -15,7 +15,7 @@ import java.net.Socket;
 public class BootStrap {
 
 
-    private final static String[] webAppNames = {"benq"};
+    private final static String[] webAppNames = {"benq", "bank"};
     /*
     * @param args
     **/

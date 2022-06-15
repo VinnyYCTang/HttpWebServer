@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>銀行帳戶 - 轉帳</title>
+        <meta content="text/html;charset=utf-8"/>
+    </head>
+    <body>
+        <form name="actTransferForm" action="/bank/act/transfer" method="get">
+            <label for="account">轉出帳號 : </label>
+            <input type="text" id="account" name="actFrom"/>
+            <br><br>
+
+            <label for="balance">轉出金額 : </label>
+            <input type="text" id="balance" name="balance"/>
+            <br><br>
+
+            <label for="actTo">轉入帳號 : </label>
+            <input type="text" id="actTo" name="actTo"/>
+            <br><br>
+            <input type="submit" value="確認轉帳"/>
+            <input type="reset" value="重置"/>
+        </form>
+    </body>
+</html>
