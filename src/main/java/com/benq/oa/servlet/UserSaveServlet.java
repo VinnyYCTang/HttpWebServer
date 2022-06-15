@@ -12,12 +12,14 @@ public class UserSaveServlet implements Servlet {
     @Override
     public void service(ServletRequest request, ServletResponse response) {
 
-        String username = request.getParameterValue("username");
-        String gender = request.getParameterValue("gender");
+        String username = request.getParameterValue("username") != null ? request.getParameterValue("username") : "";
+        String gender = request.getParameterValue("gender") != null ? request.getParameterValue("gender") : "";
         String[] interest = request.getParameterValues("interest");
         StringBuilder interests = new StringBuilder();
-        for(String interestValue : interest){
-            interests.append(interestValue).append(" ");
+        if(interest != null) {
+            for (String interestValue : interest) {
+                interests.append(interestValue).append(" ");
+            }
         }
 
         // get printWriter

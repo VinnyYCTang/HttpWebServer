@@ -32,6 +32,7 @@ public class HandlerRequest implements Runnable{
             out = new PrintWriter(clientSocket.getOutputStream());
             String requestLine = br.readLine();// GET resource.html HTTP/1.1
             String requestURI = requestLine.split(" ")[1];
+            Logger.log("requestURI : " + requestURI);
             // Check user's request is static or dynamic resource.
             if(requestURI.endsWith(".html") || requestURI.endsWith(".htm")){
                 // Handle static resource.
@@ -49,11 +50,11 @@ public class HandlerRequest implements Runnable{
                 if(servletMap != null) {
                     String servletClassName = servletMap.get(urlPattern);
                     if (servletClassName != null) {
-                        ResponseObject responseObject = new ResponseObject();
-                        responseObject.setWriter(out);
                         out.print("HTTP/1.1 200 OK\n");
                         out.print("Content-Type:text/html;charset=utf-8\n\n");
                         RequestObject requestObject = new RequestObject(requestURI);
+                        ResponseObject responseObject = new ResponseObject();
+                        responseObject.setWriter(out);
                         // create the servletClass object by reflection.
                         Class c = Class.forName(servletClassName);
                         Object obj = c.newInstance();
@@ -102,7 +103,7 @@ public class HandlerRequest implements Runnable{
             StringBuilder html = new StringBuilder();
             html.append("HTTP/1.1 200 OK\n");
             html.append("Content-Type:text/html;charset=utf-8\n\n");
-            String temp = null;
+            String temp;
             while((temp = br.readLine()) != null){
                 html.append(temp);
             }

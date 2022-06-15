@@ -1,5 +1,7 @@
 package com.example.httpwebserver.core;
 
+import com.example.httpwebserver.util.Logger;
+
 import javax.servlet.ServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,11 +35,14 @@ public class RequestObject implements ServletRequest {
                         if(parameterMap.containsKey(nameAndValueAttr[0])){
                             if(nameAndValueAttr.length > 1)
                                 parameterMap.get(nameAndValueAttr[0]).add(nameAndValueAttr[1]);
-                        }else{
+                        } else {
                             if(nameAndValueAttr.length > 1)
                                values.add(nameAndValueAttr[1]);
                             parameterMap.put(nameAndValueAttr[0], values);
                         }
+                    }
+                    for(String key : parameterMap.keySet()){
+                        Logger.log("Request Parameter : key = " + key + ", value =　" + parameterMap.get(key));
                     }
                 } else {
                     // single parameter
@@ -46,6 +51,7 @@ public class RequestObject implements ServletRequest {
                     if(nameAndValue.length > 1)
                         values.add(nameAndValue[1]);
                     parameterMap.put(nameAndValue[0], values);
+                    Logger.log("Request Parameter : key = " + nameAndValue[0] + ", value =　" + parameterMap.get(nameAndValue[0]));
                 }
             }
         }
@@ -59,7 +65,7 @@ public class RequestObject implements ServletRequest {
 
     public String[] getParameterValues(String key) {
         String[] value = new String[]{};
-        return parameterMap.get(key).toArray(value);
+        return parameterMap.containsKey(key) ? parameterMap.get(key).toArray(value) : null;
     }
 
 }
